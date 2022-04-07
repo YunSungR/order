@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.spring_order.dao.IOrderDAO">
+  	<resultMap id="memResult" type="com.spring_order.model.MemberVO">
+		<result property="memId" column="memId" />
+		<result property="memPw" column="memPw" />
+		<result property="memBirth" column="memBirth" />
+		<result property="memName" column="memName" />
+		<result property="memHp" column="memHp" />
+		<result property="memEmail" column="memEmail" />
+		<result property="memAddress" column="memAddress" />
+	</resultMap>
+  		<select id="memList" parameterType="String" resultMap="memResult" >
+  		select * from member where memId=#{memId}
+  		</select>
+  		<insert id="ordInfo" parameterType="com.spring_order.model.OrderInfoVO">
+  			insert into order_info (ocode,user_id,or_name,or_email,or_hp,re_name,re_hp,re_zip,re_addr1,re_addr2)
+  					values(#{ocode},#{user_id},#{or_name},#{or_email},#{or_hp},#{re_name},#{re_hp},#{re_zip},#{re_addr1},#{re_addr2})
+  		</insert>
+  	
+  		<select id="cartList" resultType="com.spring_order.model.CartVO">
+  			select c.cart_seq, p.product_cd, c.cartQty ,p.product_nm, p.product_stock, p.sale_price, p.trans_price  
+  			from cart c ,product p 
+  			where c.user_id=#{user_id} and c.product_cd=p.product_cd
+  		</select>
+   </mapper>
+   
+   
+   
