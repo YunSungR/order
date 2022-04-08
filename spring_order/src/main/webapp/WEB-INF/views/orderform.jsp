@@ -136,7 +136,7 @@
                                    </tr>
 					</table><br>
 					<div id="btnwrap">
-					<input type="submit" value="결제완료" id="submit">
+
 					<input type="button" id="order" name="order" value="주문하기">
 					</div>
 					</form>
