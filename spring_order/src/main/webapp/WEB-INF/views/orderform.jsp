@@ -72,11 +72,11 @@
 					<br>
 					<h3>수령인 정보</h3>
 					<table width="700">
-						<tr><th>받는분</th><td width="200"><input type="text" name="re_name" ></td>
+						<tr><th>받는분</th><td width="200"><input type="text" name="re_name" id="re_name"></td>
 						<th>연락처</th>
-								<td><input type="text" name="hp1" size="3"> - 
-										<input type="text" name="hp2" size="4" > - 
-										<input type="text" name="hp3" size="4" ></td></tr>
+								<td><input type="text" name="hp1" id="hp1" size="3"> - 
+										<input type="text" name="hp2" id="hp2" size="4" > - 
+										<input type="text" name="hp3" id="hp3" size="4" ></td></tr>
 						<tr><th>배송지 주소</th>
 								<td colspan="3">
 										<input type="text" id="re_zip" name="re_zip"   size="5"  value="" readonly > 
@@ -113,13 +113,16 @@
 								  				<c:set var="amount" value="${ca.sale_price * ca.cartQty+ca.trans_price }" />
 								  				<c:set var="sum" value="${sum + amount }" />
 												<fmt:formatNumber value="${amount}" pattern="#,###" />
-												<input type="hidden" name="amount" id="amount" value="${amount}">
+												
 										    </span> 원 </td>	
 								  </tr>			
 								  </c:forEach>
 								  
 						<tr><td colspan="6" >총구매예정금액 </td>
-								<td align="center"><fmt:formatNumber value="${sum}" pattern="#,###" /> 원<br></td></tr>			
+								<td align="center"><fmt:formatNumber value="${sum}" pattern="#,###" /> 원<br>
+								<input type="hidden" name="amount" id="amount" value="${sum}">
+								</td></tr>	
+										
 					</table><br>
 					
 					<h3>결제 정보</h3>

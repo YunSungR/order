@@ -2,12 +2,13 @@
  * 
  */
  $(function(){
+	
 	$('#order').on('click',function(){
-		alert($('#allPrdName').val());
 		//가맹점 식별코드
+		
 		IMP.init('imp74263585');
 		IMP.request_pay({
-		    pg : 'html5_inicis',
+		    pg : 'html5_inicis',// pg사
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : $('#allPrdName').val() , //결제창에서 보여질 이름
@@ -37,21 +38,44 @@
 					"pay_date" : new Date().getTime(),
 					"amount" : rsp.paid_amount,
 					"card_no" : rsp.apply_num,
-					"refund" : 'payed'
+					"refund" : 'payed',
+					"pay_method":rsp.pay_method,
+					"or_name":$('#or_name').val(),
+					"or_hp":$('#or_hp').val(),
+					"or_email":$('#or_email').val(),
+					"memAddress":$('#memAddress').val(),
+					"re_hp":$('#hp1').val()+"-"+$('#hp2').val()+"-"+$('#hp3').val(),
+					"re_zip":$('#re_zip').val(),
+					"re_addr1":$('#re_addr1').val(),
+					"re_addr2":$('#re_addr2').val()
 					}
 					$.ajax({
 			type:'post',
 			url:'/orderCard',
-			 data : JSON.stringify(result,
-				        		['imp_uid', 'merchant_uid', 'biz_email', 
-				        			'pay_date', 'amount', 'card_no', 'refund']),
-				        contentType:'application/json;charset=utf-8',
-				        dataType: 'json', //서버에서 보내줄 데이터 타입
+			 data : {"imp_uid" : rsp.imp_uid,
+					"merchant_uid" : rsp.merchant_uid,
+					"biz_email" :  $('#or_email').val(),
+					"pay_date" : new Date().getTime(),
+					"amount" : rsp.paid_amount,
+					"card_no" : rsp.apply_num,
+					"refund" : 'payed',
+					"pay_method":rsp.pay_method,
+					"or_name":$('#or_name').val(),
+					"or_hp":$('#or_hp').val(),
+					"or_email":$('#or_email').val(),
+					"memAddress":$('#memAddress').val(),
+					"re_hp":$('#hp1').val()+"-"+$('#hp2').val()+"-"+$('#hp3').val(),
+					"re_zip":$('#re_zip').val(),
+					"re_addr1":$('#re_addr1').val(),
+					"re_addr2":$('#re_addr2').val(),
+					"re_name":$('#re_name').val()
+			 		},
+				 
+				        dataType: 'text', //서버에서 보내줄 데이터 타입
 			success:function(res){
 				  if(res == 1){
-							 console.log("추가성공");	
-							 pay += 5;
-							 $('#pay_coupon').html(pay);			           
+							 console.log("결제성공");
+							 location.href="/orderComplete";		           
 				          }else{
 				             console.log("Insert Fail!!!");
 				          }

@@ -17,14 +17,17 @@
   		select * from member where memId=#{memId}
   		</select>
   		<insert id="ordInfo" parameterType="com.spring_order.model.OrderInfoVO">
-  			insert into order_info (ocode,user_id,or_name,or_email,or_hp,re_name,re_hp,re_zip,re_addr1,re_addr2)
-  					values(#{ocode},#{user_id},#{or_name},#{or_email},#{or_hp},#{re_name},#{re_hp},#{re_zip},#{re_addr1},#{re_addr2})
+  			insert into order_info (ocode,user_id,or_name,or_email,or_hp,re_name,re_hp,re_zip,re_addr1,re_addr2,order_price,otype_cd,session_id,cust_seq,order_state_cd)
+  								values(#{ocode},#{user_id},#{or_name},#{or_email},#{or_hp},#{re_name},#{re_hp},#{re_zip},#{re_addr1},#{re_addr2},#{amount},#{pay_method},#{merchant_uid},#{imp_uid},#{refund})
   		</insert>
   	
   		<select id="cartList" resultType="com.spring_order.model.CartVO">
   			select c.cart_seq, p.product_cd, c.cartQty ,p.product_nm, p.product_stock, p.sale_price, p.trans_price  
   			from cart c ,product p 
   			where c.user_id=#{user_id} and c.product_cd=p.product_cd
+  		</select>
+  		<select id="countOrd" resultType="int">
+  		select count(*) from order_info where ocode=#{ocode}
   		</select>
    </mapper>
    

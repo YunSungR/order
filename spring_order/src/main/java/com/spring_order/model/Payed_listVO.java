@@ -8,6 +8,13 @@ public class Payed_listVO {
 	private String amount;
 	private String card_no;
 	private String refund;
+	private String pay_method;
+	public String getPay_method() {
+		return pay_method;
+	}
+	public void setPay_method(String pay_method) {
+		this.pay_method = pay_method;
+	}
 	public String getImp_uid() {
 		return imp_uid;
 	}
